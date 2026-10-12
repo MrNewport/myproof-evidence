@@ -1,0 +1,428 @@
+{
+    "schema": "myproof.evidence-source.v1",
+    "source": "reviewed MyProof package and public protocol blobs",
+    "files": [
+        {
+            "source": "packages/evidence/.github/workflows/tests.yml",
+            "target": ".github/workflows/tests.yml",
+            "source_sha256": "22415b30d7440c99ae71beb3ac894a4a4bae1ae6b015761249dcc966be4b4105",
+            "release_sha256": "22415b30d7440c99ae71beb3ac894a4a4bae1ae6b015761249dcc966be4b4105",
+            "bytes": 1812
+        },
+        {
+            "source": "packages/evidence/.gitignore",
+            "target": ".gitignore",
+            "source_sha256": "dfa34f6effa5aa767ab0c451819febdb0b2997f72d44d6cb96c7cba8ea442d5b",
+            "release_sha256": "dfa34f6effa5aa767ab0c451819febdb0b2997f72d44d6cb96c7cba8ea442d5b",
+            "bytes": 24
+        },
+        {
+            "source": "packages/evidence/LICENSE",
+            "target": "LICENSE",
+            "source_sha256": "a9c18e77b16deac7d8372abb3ac7dac5f331c7ab2c1272156520bdecf3870ba7",
+            "release_sha256": "a9c18e77b16deac7d8372abb3ac7dac5f331c7ab2c1272156520bdecf3870ba7",
+            "bytes": 1077
+        },
+        {
+            "source": "packages/evidence/README.md",
+            "target": "README.md",
+            "source_sha256": "603e82af8eda07dbf9c93ffe971e47a62ee37dc3e40c4e8947b3f0119166997f",
+            "release_sha256": "bbc9f01c8fc942f0e39abc9d4e59323b599e32267aa534f9ba0b2d4298746b0a",
+            "bytes": 6626,
+            "transform": "portable-readme-paths"
+        },
+        {
+            "source": "packages/evidence/bin/myproof-verify",
+            "target": "bin/myproof-verify",
+            "source_sha256": "bd17380dcf7989e0624b0e0144eb948f641f5df3737872af33a98d17af5937d3",
+            "release_sha256": "bd17380dcf7989e0624b0e0144eb948f641f5df3737872af33a98d17af5937d3",
+            "bytes": 5557
+        },
+        {
+            "source": "packages/evidence/composer.json",
+            "target": "composer.json",
+            "source_sha256": "067c201518bfb0bfdbf8aa16985aa2746718b3990fe320d9a1fdc34308066745",
+            "release_sha256": "067c201518bfb0bfdbf8aa16985aa2746718b3990fe320d9a1fdc34308066745",
+            "bytes": 584
+        },
+        {
+            "source": "packages/evidence/release-manifest.json",
+            "target": "release-manifest.json",
+            "source_sha256": "7299e4d3e9204820deb443a636a7d4cf0a2f2361ce5e7b817f1120f733a1885e",
+            "release_sha256": "7299e4d3e9204820deb443a636a7d4cf0a2f2361ce5e7b817f1120f733a1885e",
+            "bytes": 2470
+        },
+        {
+            "source": "packages/evidence/src/BoundedZip.php",
+            "target": "src/BoundedZip.php",
+            "source_sha256": "2d54c5fe3b9278004567e7bd3aca4b3973f8ae15b7c3405def0bc02aeb176782",
+            "release_sha256": "2d54c5fe3b9278004567e7bd3aca4b3973f8ae15b7c3405def0bc02aeb176782",
+            "bytes": 3037
+        },
+        {
+            "source": "packages/evidence/src/BundleVerifier.php",
+            "target": "src/BundleVerifier.php",
+            "source_sha256": "d282f743fb9e8b378329a01c75d12595b8abbda6241bd6cec56e56474f366984",
+            "release_sha256": "d282f743fb9e8b378329a01c75d12595b8abbda6241bd6cec56e56474f366984",
+            "bytes": 2697
+        },
+        {
+            "source": "packages/evidence/src/CanonicalJson.php",
+            "target": "src/CanonicalJson.php",
+            "source_sha256": "bcd790b61750eff597f30b995f4b19f2469547846d37bd0d75df2db304477129",
+            "release_sha256": "bcd790b61750eff597f30b995f4b19f2469547846d37bd0d75df2db304477129",
+            "bytes": 3815
+        },
+        {
+            "source": "packages/evidence/src/ChainHead.php",
+            "target": "src/ChainHead.php",
+            "source_sha256": "de647006c938491168efeae4cf82fe16b7674b7c52eab0b8222c18e4bf0e56d3",
+            "release_sha256": "de647006c938491168efeae4cf82fe16b7674b7c52eab0b8222c18e4bf0e56d3",
+            "bytes": 177
+        },
+        {
+            "source": "packages/evidence/src/ChainVerifier.php",
+            "target": "src/ChainVerifier.php",
+            "source_sha256": "941a8afd5ff10f2ed3562b3037977f494d566715dc64254a86f43063aa7b9bf3",
+            "release_sha256": "941a8afd5ff10f2ed3562b3037977f494d566715dc64254a86f43063aa7b9bf3",
+            "bytes": 1757
+        },
+        {
+            "source": "packages/evidence/src/CollectionSchema.php",
+            "target": "src/CollectionSchema.php",
+            "source_sha256": "3d87e80af379e04b8ce747c7ea97baa994b78785bfe90af15e7df7bde9005599",
+            "release_sha256": "3d87e80af379e04b8ce747c7ea97baa994b78785bfe90af15e7df7bde9005599",
+            "bytes": 7942
+        },
+        {
+            "source": "packages/evidence/src/CollectionSigningInput.php",
+            "target": "src/CollectionSigningInput.php",
+            "source_sha256": "21c0deec2f2da972e04430575cc5fafcbeb2ec00b164b51da158203826bfdcfb",
+            "release_sha256": "21c0deec2f2da972e04430575cc5fafcbeb2ec00b164b51da158203826bfdcfb",
+            "bytes": 436
+        },
+        {
+            "source": "packages/evidence/src/CollectionVerifier.php",
+            "target": "src/CollectionVerifier.php",
+            "source_sha256": "4f451b9696d7730cdd01bdb6199f284f780c73894e18bc64d424e4081b68a1d4",
+            "release_sha256": "4f451b9696d7730cdd01bdb6199f284f780c73894e18bc64d424e4081b68a1d4",
+            "bytes": 4979
+        },
+        {
+            "source": "packages/evidence/src/DemoSigner.php",
+            "target": "src/DemoSigner.php",
+            "source_sha256": "72787e5343339b5f6104454c808f89acfe650846ad32aca221d486ee8a0ec90c",
+            "release_sha256": "72787e5343339b5f6104454c808f89acfe650846ad32aca221d486ee8a0ec90c",
+            "bytes": 719
+        },
+        {
+            "source": "packages/evidence/src/Event.php",
+            "target": "src/Event.php",
+            "source_sha256": "25532b26d8cf68bf45320e26529a952a6803d424d43ba2c83c552373793c4b13",
+            "release_sha256": "25532b26d8cf68bf45320e26529a952a6803d424d43ba2c83c552373793c4b13",
+            "bytes": 996
+        },
+        {
+            "source": "packages/evidence/src/EvidenceException.php",
+            "target": "src/EvidenceException.php",
+            "source_sha256": "100b8d39283bf8a0b9f53a31eba6358d3909ee1da1257d9a2807bc1b0200131d",
+            "release_sha256": "100b8d39283bf8a0b9f53a31eba6358d3909ee1da1257d9a2807bc1b0200131d",
+            "bytes": 128
+        },
+        {
+            "source": "packages/evidence/src/Schema.php",
+            "target": "src/Schema.php",
+            "source_sha256": "327c6a3f89dc458187b92607c33357a12398081c9649d88e7339793a9441fe4f",
+            "release_sha256": "327c6a3f89dc458187b92607c33357a12398081c9649d88e7339793a9441fe4f",
+            "bytes": 12842
+        },
+        {
+            "source": "packages/evidence/src/SegmentVerifier.php",
+            "target": "src/SegmentVerifier.php",
+            "source_sha256": "c7c731499bb673dfe1e63ab156698ae8fefbc9d08c6f4b8ffb1173b7a4ca106e",
+            "release_sha256": "c7c731499bb673dfe1e63ab156698ae8fefbc9d08c6f4b8ffb1173b7a4ca106e",
+            "bytes": 2466
+        },
+        {
+            "source": "packages/evidence/src/SigningInput.php",
+            "target": "src/SigningInput.php",
+            "source_sha256": "d97461eaabff75fea6bb24bc3b2d4ea356e5c17ed1b23bb0ed460460c2c6c0b8",
+            "release_sha256": "d97461eaabff75fea6bb24bc3b2d4ea356e5c17ed1b23bb0ed460460c2c6c0b8",
+            "bytes": 393
+        },
+        {
+            "source": "packages/evidence/src/SourceEventId.php",
+            "target": "src/SourceEventId.php",
+            "source_sha256": "e7aa44fbd4e10245834d04d9f0f0f67bfb36c3a8c3311c207b74c0cb8ce7d272",
+            "release_sha256": "e7aa44fbd4e10245834d04d9f0f0f67bfb36c3a8c3311c207b74c0cb8ce7d272",
+            "bytes": 740
+        },
+        {
+            "source": "packages/evidence/src/StrictJsonParser.php",
+            "target": "src/StrictJsonParser.php",
+            "source_sha256": "cf28d3bae29a4e453f18ff920ca9d5b7c5ae0b1fa1a49f5ec1dddde22522daa5",
+            "release_sha256": "cf28d3bae29a4e453f18ff920ca9d5b7c5ae0b1fa1a49f5ec1dddde22522daa5",
+            "bytes": 4951
+        },
+        {
+            "source": "packages/evidence/src/TrustedKey.php",
+            "target": "src/TrustedKey.php",
+            "source_sha256": "f57143b763c66527a10b0235a6031ebe427bb0aefe40ff6fe96b53757dd69d4b",
+            "release_sha256": "f57143b763c66527a10b0235a6031ebe427bb0aefe40ff6fe96b53757dd69d4b",
+            "bytes": 556
+        },
+        {
+            "source": "packages/evidence/src/VerificationResult.php",
+            "target": "src/VerificationResult.php",
+            "source_sha256": "b32843b86a0915b9818fe8be01f8d5f450d6b502bc06f05259b5f29768615eda",
+            "release_sha256": "b32843b86a0915b9818fe8be01f8d5f450d6b502bc06f05259b5f29768615eda",
+            "bytes": 234
+        },
+        {
+            "source": "packages/evidence/tests/FixturePaths.php",
+            "target": "tests/FixturePaths.php",
+            "source_sha256": "fd57e2f70e9a03f9fe03a5e8c8918c45a0883cb4d77fa8b7d23646d7e58ece80",
+            "release_sha256": "fd57e2f70e9a03f9fe03a5e8c8918c45a0883cb4d77fa8b7d23646d7e58ece80",
+            "bytes": 636
+        },
+        {
+            "source": "packages/evidence/tests/cli.php",
+            "target": "tests/cli.php",
+            "source_sha256": "f660b2a816eb6599c275b87a56416c72138e56fcf738ab24c5bd0f11adaa8b73",
+            "release_sha256": "f660b2a816eb6599c275b87a56416c72138e56fcf738ab24c5bd0f11adaa8b73",
+            "bytes": 3297
+        },
+        {
+            "source": "packages/evidence/tests/collections.php",
+            "target": "tests/collections.php",
+            "source_sha256": "f03bbfd5f52ad8253bc6c9bda84f62045425b4e3a618555f8d4050cd3652a77f",
+            "release_sha256": "f03bbfd5f52ad8253bc6c9bda84f62045425b4e3a618555f8d4050cd3652a77f",
+            "bytes": 8187
+        },
+        {
+            "source": "packages/evidence/tests/run.php",
+            "target": "tests/run.php",
+            "source_sha256": "e2d5ed2d717bde9f2fd4b3e1d03b09de844e99c9bb279c56104bb65e29a6fcfa",
+            "release_sha256": "e2d5ed2d717bde9f2fd4b3e1d03b09de844e99c9bb279c56104bb65e29a6fcfa",
+            "bytes": 21837
+        },
+        {
+            "source": "spec/evidence/README.md",
+            "target": "spec/evidence/README.md",
+            "source_sha256": "55fe1246854e13f9e2483370bdb4a625885cad2e17f88e538728bd579c7d4167",
+            "release_sha256": "9a9a21238ee6b3e099fef5aa7cc2135acfd88504af13e8cd1d4fcc42af32e2af",
+            "bytes": 14450,
+            "transform": "remove-private-review-link"
+        },
+        {
+            "source": "spec/evidence/collection.schema.json",
+            "target": "spec/evidence/collection.schema.json",
+            "source_sha256": "37e95e1f1c15ad2e3b2993b96d1aae50c95c959c1d5c01735bc2c49d9de0b946",
+            "release_sha256": "37e95e1f1c15ad2e3b2993b96d1aae50c95c959c1d5c01735bc2c49d9de0b946",
+            "bytes": 9453
+        },
+        {
+            "source": "spec/evidence/collections.md",
+            "target": "spec/evidence/collections.md",
+            "source_sha256": "30828690537a69c3e90493f8f53457fe18112c6e22f2d6c9cb84e2ca437b477c",
+            "release_sha256": "30828690537a69c3e90493f8f53457fe18112c6e22f2d6c9cb84e2ca437b477c",
+            "bytes": 5223
+        },
+        {
+            "source": "spec/evidence/event.schema.json",
+            "target": "spec/evidence/event.schema.json",
+            "source_sha256": "910fbca4799a83357341e1c67d616f17ce84fb103bf5b87ab90c663b8a196432",
+            "release_sha256": "910fbca4799a83357341e1c67d616f17ce84fb103bf5b87ab90c663b8a196432",
+            "bytes": 27840
+        },
+        {
+            "source": "spec/evidence/fixtures/canonical-vectors.json",
+            "target": "spec/evidence/fixtures/canonical-vectors.json",
+            "source_sha256": "e011e0416bf4272a024e78c535df35c15bb47df2aa734fb3464f6a90be34a153",
+            "release_sha256": "e011e0416bf4272a024e78c535df35c15bb47df2aa734fb3464f6a90be34a153",
+            "bytes": 2256
+        },
+        {
+            "source": "spec/evidence/fixtures/collection-test-key.hex",
+            "target": "spec/evidence/fixtures/collection-test-key.hex",
+            "source_sha256": "bf648bff54d3c935b57d9fb73e98c34a11011868948b4dd9238139d59a08940a",
+            "release_sha256": "bf648bff54d3c935b57d9fb73e98c34a11011868948b4dd9238139d59a08940a",
+            "bytes": 65
+        },
+        {
+            "source": "spec/evidence/fixtures/collection-test/collection.json",
+            "target": "spec/evidence/fixtures/collection-test/collection.json",
+            "source_sha256": "1c6c6c84f41ee27cc3ac93f2fd9c89baf61da2555c6751bd78c037e7c142d65f",
+            "release_sha256": "1c6c6c84f41ee27cc3ac93f2fd9c89baf61da2555c6751bd78c037e7c142d65f",
+            "bytes": 2992
+        },
+        {
+            "source": "spec/evidence/fixtures/collection-test/segment-0001.zip",
+            "target": "spec/evidence/fixtures/collection-test/segment-0001.zip",
+            "source_sha256": "3d7cbba8d119dc6ba779ac1620d5db0c50dd05cc078e834f957224748e91ffab",
+            "release_sha256": "3d7cbba8d119dc6ba779ac1620d5db0c50dd05cc078e834f957224748e91ffab",
+            "bytes": 2139
+        },
+        {
+            "source": "spec/evidence/fixtures/collection-test/segment-0002.zip",
+            "target": "spec/evidence/fixtures/collection-test/segment-0002.zip",
+            "source_sha256": "b8b652683c45ec96f3c40c9d1c4ec12b21b9b0ae03cf04c52bfb3ffe2e336c10",
+            "release_sha256": "b8b652683c45ec96f3c40c9d1c4ec12b21b9b0ae03cf04c52bfb3ffe2e336c10",
+            "bytes": 2270
+        },
+        {
+            "source": "spec/evidence/fixtures/collection-test/segment-0003.zip",
+            "target": "spec/evidence/fixtures/collection-test/segment-0003.zip",
+            "source_sha256": "98d001ad4ac90fed82091b8b41eb917f6d688e41ac9ea5b2a4a1ede5999e1e3a",
+            "release_sha256": "98d001ad4ac90fed82091b8b41eb917f6d688e41ac9ea5b2a4a1ede5999e1e3a",
+            "bytes": 2547
+        },
+        {
+            "source": "spec/evidence/fixtures/collection-test/signature.ed25519",
+            "target": "spec/evidence/fixtures/collection-test/signature.ed25519",
+            "source_sha256": "6e1fa9888e7c1fbaf0a04c36797d023908a5c32966897460aa41e1ffbfec90a7",
+            "release_sha256": "6e1fa9888e7c1fbaf0a04c36797d023908a5c32966897460aa41e1ffbfec90a7",
+            "bytes": 64
+        },
+        {
+            "source": "spec/evidence/fixtures/collection-test/snapshot.json",
+            "target": "spec/evidence/fixtures/collection-test/snapshot.json",
+            "source_sha256": "c2a1939e58d3f7713ad7a724c33385cdd8b466d2de2d9535c64ef4ba10b80672",
+            "release_sha256": "c2a1939e58d3f7713ad7a724c33385cdd8b466d2de2d9535c64ef4ba10b80672",
+            "bytes": 309
+        },
+        {
+            "source": "spec/evidence/fixtures/expected.json",
+            "target": "spec/evidence/fixtures/expected.json",
+            "source_sha256": "ba23e5f3ffc293bdd0a84117fdf002673dc97954a2d26fc756d5a94defdda8a7",
+            "release_sha256": "ba23e5f3ffc293bdd0a84117fdf002673dc97954a2d26fc756d5a94defdda8a7",
+            "bytes": 1163
+        },
+        {
+            "source": "spec/evidence/fixtures/merchant-event.sha256",
+            "target": "spec/evidence/fixtures/merchant-event.sha256",
+            "source_sha256": "08c6169df4681d48e090b62da84b2f985a5fb33402b8a45f8740508250daa856",
+            "release_sha256": "08c6169df4681d48e090b62da84b2f985a5fb33402b8a45f8740508250daa856",
+            "bytes": 65
+        },
+        {
+            "source": "spec/evidence/fixtures/merchant-test-bundle/events.ndjson",
+            "target": "spec/evidence/fixtures/merchant-test-bundle/events.ndjson",
+            "source_sha256": "bde8a1edae406b74934ff43ada9d5fcc9f7ffa46be0f0610131707f5c30154d1",
+            "release_sha256": "bde8a1edae406b74934ff43ada9d5fcc9f7ffa46be0f0610131707f5c30154d1",
+            "bytes": 6760
+        },
+        {
+            "source": "spec/evidence/fixtures/merchant-test-bundle/manifest.json",
+            "target": "spec/evidence/fixtures/merchant-test-bundle/manifest.json",
+            "source_sha256": "547d936ee84ad0f953c2fdece11fc311c64c05c200f90208975b0b12459cf051",
+            "release_sha256": "547d936ee84ad0f953c2fdece11fc311c64c05c200f90208975b0b12459cf051",
+            "bytes": 1454
+        },
+        {
+            "source": "spec/evidence/fixtures/merchant-test-bundle/report.html",
+            "target": "spec/evidence/fixtures/merchant-test-bundle/report.html",
+            "source_sha256": "3fe4bcb2ae561ca485e76dfe43458f76d56633ff7beba261f3ad05a3d6fb7ab2",
+            "release_sha256": "3fe4bcb2ae561ca485e76dfe43458f76d56633ff7beba261f3ad05a3d6fb7ab2",
+            "bytes": 232
+        },
+        {
+            "source": "spec/evidence/fixtures/merchant-test-bundle/signature.ed25519",
+            "target": "spec/evidence/fixtures/merchant-test-bundle/signature.ed25519",
+            "source_sha256": "62372758093554c455259107b1916354f1c2127a03806f7f66add11cabaa1853",
+            "release_sha256": "62372758093554c455259107b1916354f1c2127a03806f7f66add11cabaa1853",
+            "bytes": 64
+        },
+        {
+            "source": "spec/evidence/fixtures/merchant-test-bundle/snapshot.json",
+            "target": "spec/evidence/fixtures/merchant-test-bundle/snapshot.json",
+            "source_sha256": "a99638ce6d986fcdbf2ae5c9a80f6b3b7b0322c780fdb68aa4f7e9daa8c77763",
+            "release_sha256": "a99638ce6d986fcdbf2ae5c9a80f6b3b7b0322c780fdb68aa4f7e9daa8c77763",
+            "bytes": 432
+        },
+        {
+            "source": "spec/evidence/fixtures/test-bundle/events.ndjson",
+            "target": "spec/evidence/fixtures/test-bundle/events.ndjson",
+            "source_sha256": "c164a7146f95722b1aff5be6fefd2a66224c15d1a0e063953a30f1fd1fb28477",
+            "release_sha256": "c164a7146f95722b1aff5be6fefd2a66224c15d1a0e063953a30f1fd1fb28477",
+            "bytes": 5785
+        },
+        {
+            "source": "spec/evidence/fixtures/test-bundle/manifest.json",
+            "target": "spec/evidence/fixtures/test-bundle/manifest.json",
+            "source_sha256": "cfcbc01dea4754bd007a3ca3a030ee64641418f41099db940ea0d5a833c86ee6",
+            "release_sha256": "cfcbc01dea4754bd007a3ca3a030ee64641418f41099db940ea0d5a833c86ee6",
+            "bytes": 1356
+        },
+        {
+            "source": "spec/evidence/fixtures/test-bundle/report.html",
+            "target": "spec/evidence/fixtures/test-bundle/report.html",
+            "source_sha256": "3fe4bcb2ae561ca485e76dfe43458f76d56633ff7beba261f3ad05a3d6fb7ab2",
+            "release_sha256": "3fe4bcb2ae561ca485e76dfe43458f76d56633ff7beba261f3ad05a3d6fb7ab2",
+            "bytes": 232
+        },
+        {
+            "source": "spec/evidence/fixtures/test-bundle/signature.ed25519",
+            "target": "spec/evidence/fixtures/test-bundle/signature.ed25519",
+            "source_sha256": "36568dfcca73cdd946b399a712fa58f3fc079d7396a9ee5f37f71979497b3b3e",
+            "release_sha256": "36568dfcca73cdd946b399a712fa58f3fc079d7396a9ee5f37f71979497b3b3e",
+            "bytes": 64
+        },
+        {
+            "source": "spec/evidence/fixtures/test-bundle/snapshot.json",
+            "target": "spec/evidence/fixtures/test-bundle/snapshot.json",
+            "source_sha256": "a99638ce6d986fcdbf2ae5c9a80f6b3b7b0322c780fdb68aa4f7e9daa8c77763",
+            "release_sha256": "a99638ce6d986fcdbf2ae5c9a80f6b3b7b0322c780fdb68aa4f7e9daa8c77763",
+            "bytes": 432
+        },
+        {
+            "source": "spec/evidence/fixtures/test-only-public-key.hex",
+            "target": "spec/evidence/fixtures/test-only-public-key.hex",
+            "source_sha256": "d383866385799e53cc8e0f2ed193b62e175f45dfd0b6f071aead7f90030f0f0a",
+            "release_sha256": "d383866385799e53cc8e0f2ed193b62e175f45dfd0b6f071aead7f90030f0f0a",
+            "bytes": 65
+        },
+        {
+            "source": "spec/evidence/generate-collection-fixtures.mjs",
+            "target": "spec/evidence/generate-collection-fixtures.mjs",
+            "source_sha256": "401d1b48a458098cfb093ec6de844fc183d348e579455113b0552f9607cad409",
+            "release_sha256": "401d1b48a458098cfb093ec6de844fc183d348e579455113b0552f9607cad409",
+            "bytes": 4739
+        },
+        {
+            "source": "spec/evidence/generate-fixtures.mjs",
+            "target": "spec/evidence/generate-fixtures.mjs",
+            "source_sha256": "067dc03f9723eb26acc634911fd6e30e6f4e86c831df52ba2d551e67aef9f30d",
+            "release_sha256": "067dc03f9723eb26acc634911fd6e30e6f4e86c831df52ba2d551e67aef9f30d",
+            "bytes": 8937
+        },
+        {
+            "source": "spec/evidence/generate-merchant-fixture.mjs",
+            "target": "spec/evidence/generate-merchant-fixture.mjs",
+            "source_sha256": "421069dda0baf35ace9b2e48405e318d83f8511568f63f3a535b2bf614e87779",
+            "release_sha256": "421069dda0baf35ace9b2e48405e318d83f8511568f63f3a535b2bf614e87779",
+            "bytes": 3003
+        },
+        {
+            "source": "spec/evidence/generate-schemas.php",
+            "target": "spec/evidence/generate-schemas.php",
+            "source_sha256": "5a6e3325b559e56bb63c7ec4ffa0f4bb7dc74249b5863d9b51ddf4aa1f482bdb",
+            "release_sha256": "5a6e3325b559e56bb63c7ec4ffa0f4bb7dc74249b5863d9b51ddf4aa1f482bdb",
+            "bytes": 9506
+        },
+        {
+            "source": "spec/evidence/manifest.schema.json",
+            "target": "spec/evidence/manifest.schema.json",
+            "source_sha256": "9d374439716b1caffe3ee72139a075692ad61cf240d0ad8eb8a30644815d346a",
+            "release_sha256": "9d374439716b1caffe3ee72139a075692ad61cf240d0ad8eb8a30644815d346a",
+            "bytes": 5810
+        },
+        {
+            "source": "spec/evidence/segment.schema.json",
+            "target": "spec/evidence/segment.schema.json",
+            "source_sha256": "7527d1d27acf952e9ce1998a244114c058dc0e5f74ae2f7fff245ed30252abb1",
+            "release_sha256": "7527d1d27acf952e9ce1998a244114c058dc0e5f74ae2f7fff245ed30252abb1",
+            "bytes": 6893
+        }
+    ]
+}

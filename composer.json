@@ -1,0 +1,17 @@
+{
+  "name": "myproof/evidence",
+  "description": "Portable bounded MyProof v2 evidence canonicalization and offline verification.",
+  "type": "library",
+  "license": "MIT",
+  "require": {
+    "php": "^8.3",
+    "ext-json": "*",
+    "ext-mbstring": "*",
+    "ext-sodium": "*",
+    "mmccook/php-json-canonicalization-scheme": "^1.0.0"
+  },
+  "autoload": {"psr-4": {"MyProof\\Evidence\\": "src/"}},
+  "bin": ["bin/myproof-verify"],
+  "scripts": {"test": ["php tests/run.php", "php tests/cli.php", "php tests/collections.php"]},
+  "config": {"allow-plugins": {}, "sort-packages": true}
+}

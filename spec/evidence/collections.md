@@ -1,0 +1,27 @@
+# Complete-history collections v1 (unpublished)
+
+`myproof.evidence.collection.v1` is a new signed index over bounded ZIP parts. `myproof.evidence.segment.v1` is a new unsigned segment envelope authenticated through the signed index. Neither changes the v2 manifest, its signing domain, original canonical event bytes, event hashes, sequence numbers or predecessor semantics. Old v2 bundles still use the original verifier.
+
+Signing input is exactly UTF-8 `MyProof evidence collection v1\n` followed by raw SHA-256 of the canonical index. The signature is ordinary Ed25519. A verifier requires an independently obtained, explicitly mode-bound public key; an included key cannot establish its own trust. Local deterministic fixtures are TEST MATERIAL only. No KMS or cloud acceptance is claimed by these fixtures.
+
+The closed index fields are `schema`, `export_id`, `workspace_id`, `delivery_id`, `mode`, `privacy_mode`, `created_at`, `key_id`, `signature_algorithm`, `full_head` (`sequence`, `sha256`), `event_count`, `snapshot_sha256`, `segments`, `artifacts`, `coverage`. Every supported source must have one coverage record. `snapshot.json` is mandatory and its ownership, mode, privacy, sequence and final hash must match the index.
+
+Each ordered descriptor contains `index`, `path`, `segment_sha256`, `archive_sha256`, `archive_size`, `events_sha256`, `events_bytes`, `event_count`, `first_sequence`, `last_sequence`, `previous_sha256`, `last_sha256`. Index starts at 1; path must be precisely `segment-0001.zip` through `segment-1024.zip`. Indices, sequence ranges and predecessor hashes must be unique and contiguous from genesis through the declared full head. Missing, duplicated, reordered or overlapping parts fail. There is no successful partial-prefix result.
+
+Each ZIP contains `segment.json`, `events.ndjson` and every declared artifact, with no other entries. Envelope fields are `schema`, `export_id`, `workspace_id`, `delivery_id`, `mode`, `privacy_mode`, `index`, `chain_start` (`sequence`, `previous_sha256`), `chain_head` (`sequence`, `sha256`), `events_sha256`, `events_bytes`, `event_count`, `artifacts`. Identity and metadata must exactly match the signed descriptor. `events.ndjson` is original v2 canonical bytes with one LF after each event, including the last. Its digest and byte count include those LFs; each event hash excludes its LF as before. Every v2 event is revalidated, with duplicate event and source identities rejected across all segments.
+
+Artifacts are closed `{name,sha256,size}` records. Names are flat ASCII allowlisted filenames; duplicates, traversal, directory entries, symlinks, unexpected files and unsupported ZIP compression methods fail. ZIP metadata is checked before bounded expansion. Context and HTML are bound as artifacts, not represented as provider truth. Private context capture time can differ from the immutable event cutoff and must be stated in each segment context artifact.
+
+Bounds: 1–1,024 segments; 1–500 events and at most 4 MiB NDJSON per part; at most 512,000 events total; at most 16 MiB compressed ZIP per part; at most 8 MiB total artifact bytes per part or root; at most 16 artifacts and 18 ZIP entries; envelope at most 64 KiB; index at most 1 MiB and the existing canonical JSON depth/node budget. Reaching a bound requires a complete export or an explicit failure, never truncation. Full offline verification reads one part at a time; duplicate-identity sets remain bounded by total event count. Allow adequate verifier memory for large collections.
+
+CLI (ext-zip is required for collection archive verification):
+
+```sh
+myproof-verify --collection=/path/to/index-and-parts --public-key=/independent/pin.hex --key-id=registered-key --mode=live
+```
+
+Extract the root index ZIP into a directory and place the downloaded `segment-NNNN.zip` files beside `collection.json`, `signature.ed25519` and the root artifacts. The directory must contain exactly those bound files. The verifier does not retrieve URLs supplied by an index. A success establishes complete byte/chain integrity and the independently pinned signature, not reading, cardholder identity, receipt or a dispute outcome.
+
+`generate-collection-fixtures.mjs` generates a three-part Node crypto/JCS/system-ZIP fixture independently of PHP. It preserves the existing v2 fixture stream byte-for-byte, including Unicode and late/adverse events. PHP tests cover valid parts, tampered archives/artifacts, mode/key/domain mismatch, omitted/reordered/duplicated parts, range/path/head changes, duplicate JSON keys and numeric syntax. Rebuilt and re-signed adversarial collections also test cross-segment duplicate event/source identities and unexpected ZIP entries, with separate traversal, duplicate-name, symlink and expansion-limit checks. Existing v2 suites remain mandatory.
+
+`collection.schema.json` and `segment.schema.json` document the closed structural shapes and scalar bounds. Run `php spec/evidence/generate-schemas.php` to regenerate them together with the unchanged v2 schemas. JSON Schema alone cannot enforce the canonical token profile, byte lengths, aggregate budgets, ordered cross-document arithmetic, hashes or signatures; the independent verifier remains mandatory.

@@ -1,0 +1,101 @@
+#!/usr/bin/env php
+<?php
+declare(strict_types=1);
+
+use MyProof\Evidence\BundleVerifier;
+use MyProof\Evidence\ChainVerifier;
+use MyProof\Evidence\Event;
+use MyProof\Evidence\EvidenceException;
+use MyProof\Evidence\TrustedKey;
+
+$autoload = $GLOBALS['_composer_autoload_path'] ?? dirname(__DIR__).'/vendor/autoload.php';
+if (!is_file($autoload)) {
+    fwrite(STDERR, "Install package dependencies first (composer install).\n");
+    exit(2);
+}
+require $autoload;
+
+try {
+    $options = getopt('', ['bundle:', 'collection:', 'public-key:', 'key-id:', 'mode:']);
+    foreach (['public-key', 'key-id', 'mode'] as $required) {
+        if (!isset($options[$required]) || !is_string($options[$required])) {
+            throw new EvidenceException('Usage: myproof-verify --bundle=DIR --public-key=PINNED_HEX_FILE --key-id=ID --mode=live|demo|test');
+        }
+    }
+    if (isset($options['bundle']) === isset($options['collection']) || !is_string($options['bundle'] ?? $options['collection'] ?? null)) {
+        throw new EvidenceException('Specify exactly one --bundle=DIR or --collection=DIR.');
+    }
+    $directory = realpath($options['bundle'] ?? $options['collection']);
+    $keyFile = realpath($options['public-key']);
+    if ($directory === false || !is_dir($directory) || $keyFile === false || !is_file($keyFile) || str_starts_with($keyFile, $directory.DIRECTORY_SEPARATOR)) {
+        throw new EvidenceException('Require a bundle directory and independently pinned public-key file outside that directory.');
+    }
+    $read = static function (string $path, int $limit): string {
+        if (is_link($path) || !is_file($path)) {
+            throw new EvidenceException('Missing file or prohibited symlink.');
+        }
+        $bytes = file_get_contents($path, false, null, 0, $limit + 1);
+        if ($bytes === false || strlen($bytes) > $limit) {
+            throw new EvidenceException('File cannot be read within its bound.');
+        }
+        return $bytes;
+    };
+    $hex = trim($read($keyFile, 66));
+    if (preg_match('/\A[0-9a-f]{64}\z/', $hex) !== 1) {
+        throw new EvidenceException('Pinned key file must contain 64 lowercase hexadecimal characters.');
+    }
+    if (isset($options['collection'])) {
+        $indexBytes = $read($directory.'/collection.json', \MyProof\Evidence\CollectionSchema::MAX_INDEX_BYTES);
+        $index = \MyProof\Evidence\CollectionSchema::index((new \MyProof\Evidence\CanonicalJson())->requireCanonical($indexBytes));
+        $expected = ['collection.json', 'signature.ed25519', ...array_column($index->segments, 'path'), ...array_column($index->artifacts, 'name')];
+        $actual = array_values(array_diff(scandir($directory), ['.', '..']));
+        sort($expected);
+        sort($actual);
+        if ($actual !== $expected) {
+            throw new EvidenceException('Collection directory has missing or unbound files.');
+        }
+        $result = (new \MyProof\Evidence\CollectionVerifier())->verify($indexBytes, $read($directory.'/signature.ed25519', 64),
+            new TrustedKey($options['key-id'], hex2bin($hex), $options['mode']),
+            static fn (string $name, int $size): string => $read($directory.'/'.$name, $size),
+            static fn (string $name, int $size): string => $read($directory.'/'.$name, $size));
+        fwrite(STDOUT, json_encode(['verified' => true, 'format' => 'collection.v1', 'mode' => $result->mode, 'key_id' => $result->keyId,
+            'sequence' => $result->head->sequence, 'segments' => count($index->segments), 'scope' => 'Complete chain integrity and independently pinned signature only; no proof of receipt.'], JSON_THROW_ON_ERROR)."\n");
+        exit(0);
+    }
+    $eventFile = $directory.'/events.ndjson';
+    if (is_link($eventFile) || !is_file($eventFile)) {
+        throw new EvidenceException('Missing event stream or prohibited symlink.');
+    }
+    $events = static function () use ($eventFile): Generator {
+        $stream = fopen($eventFile, 'rb');
+        if ($stream === false) {
+            throw new EvidenceException('Cannot open event stream.');
+        }
+        $total = 0;
+        try {
+            while (($line = fgets($stream, Event::MAX_BYTES + 2)) !== false) {
+                $total += strlen($line);
+                if ($total > ChainVerifier::MAX_CHAIN_BYTES || !str_ends_with($line, "\n")) {
+                    throw new EvidenceException('Event stream exceeds its bound or has no line terminator.');
+                }
+                yield substr($line, 0, -1);
+            }
+            if (!feof($stream)) {
+                throw new EvidenceException('Event stream read failed.');
+            }
+        } finally {
+            fclose($stream);
+        }
+    };
+    $result = (new BundleVerifier())->verify(
+        $read($directory.'/manifest.json', 262144),
+        $read($directory.'/signature.ed25519', 64),
+        new TrustedKey($options['key-id'], hex2bin($hex), $options['mode']),
+        $events(),
+        static fn (string $name, int $size): string => $read($directory.'/'.$name, $size),
+    );
+    fwrite(STDOUT, json_encode(['verified' => true, 'mode' => $result->mode, 'key_id' => $result->keyId, 'sequence' => $result->head->sequence, 'artifacts' => $result->artifactCount, 'scope' => 'Integrity and pinned-key signature only; observations are not independent proof of receipt.'], JSON_THROW_ON_ERROR)."\n");
+} catch (Throwable $exception) {
+    fwrite(STDERR, 'Verification failed: '.($exception instanceof EvidenceException ? $exception->getMessage() : 'invalid input or runtime failure')."\n");
+    exit(1);
+}

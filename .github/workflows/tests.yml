@@ -1,0 +1,43 @@
+name: Evidence package
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  protocol:
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        php: ['8.3', '8.4']
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: shivammathur/setup-php@d52fc211a0436f8839a587b3b5b8efddab4744ea # v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, sodium, zip
+          coverage: none
+          tools: composer:v2
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+      - run: composer validate --strict
+      - run: composer install --no-interaction --prefer-dist
+      - run: composer test
+      - run: node spec/evidence/generate-fixtures.mjs
+      - run: node spec/evidence/generate-merchant-fixture.mjs
+      - run: node spec/evidence/generate-collection-fixtures.mjs
+      - run: php spec/evidence/generate-schemas.php
+      - run: git diff --exit-code -- spec/evidence
+      - name: Installed consumer CLI
+        run: |
+          mkdir -p "$RUNNER_TEMP/consumer"
+          printf '%s\n' '{"name":"fixture/consumer","repositories":[{"type":"path","url":"'"$GITHUB_WORKSPACE"'","options":{"symlink":false,"versions":{"myproof/evidence":"1.0.0"}}}],"require":{"myproof/evidence":"1.0.0"},"config":{"allow-plugins":{}}}' > "$RUNNER_TEMP/consumer/composer.json"
+          composer install --working-dir="$RUNNER_TEMP/consumer" --no-interaction --prefer-dist
+          "$RUNNER_TEMP/consumer/vendor/bin/myproof-verify" \
+            --bundle="$GITHUB_WORKSPACE/spec/evidence/fixtures/test-bundle" \
+            --public-key="$GITHUB_WORKSPACE/spec/evidence/fixtures/test-only-public-key.hex" \
+            --key-id=test-vector-2026 --mode=test

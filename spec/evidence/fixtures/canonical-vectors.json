@@ -1,0 +1,38 @@
+[
+  {
+    "name": "utf16-key-order",
+    "input": "{\n  \"1\": \"one\",\n  \"דּ\": \"Hebrew\",\n  \"😀\": \"supplementary\",\n  \"€\": \"Euro\",\n  \"\\r\": \"CR\",\n  \"\": \"control\",\n  \"ö\": \"Latin\"\n}",
+    "canonical": "{\"\\r\":\"CR\",\"1\":\"one\",\"\":\"control\",\"ö\":\"Latin\",\"€\":\"Euro\",\"😀\":\"supplementary\",\"דּ\":\"Hebrew\"}",
+    "sha256": "55f8d41e8fb93bf3684ff7adacc906ad19fbb398fec3f67f61ff09075c146a30"
+  },
+  {
+    "name": "line-separators-and-literal-escapes",
+    "input": "{\n  \"text\": \"x y z\",\n  \"literal\": \"\\\\u2028\\\\u2029\",\n  \"escaped\": \"\\\\ \",\n  \"controls\": \"\\u0000\\b\\f\\n\\r\\t\\\"\\\\/\"\n}",
+    "canonical": "{\"controls\":\"\\u0000\\b\\f\\n\\r\\t\\\"\\\\/\",\"escaped\":\"\\\\ \",\"literal\":\"\\\\u2028\\\\u2029\",\"text\":\"x y z\"}",
+    "sha256": "6f09e0539db0f793a51c331970ec7545316cd0ffab30695c9e7163378ce1b68a"
+  },
+  {
+    "name": "object-array-distinction",
+    "input": "{\n  \"object\": {},\n  \"list\": [],\n  \"numericObject\": {\n    \"0\": \"zero\",\n    \"2\": \"two\",\n    \"10\": \"ten\"\n  },\n  \"nested\": [\n    {},\n    []\n  ]\n}",
+    "canonical": "{\"list\":[],\"nested\":[{},[]],\"numericObject\":{\"0\":\"zero\",\"10\":\"ten\",\"2\":\"two\"},\"object\":{}}",
+    "sha256": "4b8234e927d660f2590052e1018f3190ea58b2f99056e03442836fa7fd2cb906"
+  },
+  {
+    "name": "integer-limits",
+    "input": "[\n  -9007199254740991,\n  9007199254740991,\n  0,\n  42\n]",
+    "canonical": "[-9007199254740991,9007199254740991,0,42]",
+    "sha256": "841f3ef2fe2b1233209930f3c39c4d3be93dc59fb426c32da8aa6e30d9543baf"
+  },
+  {
+    "name": "unicode-not-normalized",
+    "input": "{\n  \"composed\": \"é\",\n  \"decomposed\": \"é\",\n  \"supplementary\": \"𐀀\"\n}",
+    "canonical": "{\"composed\":\"é\",\"decomposed\":\"é\",\"supplementary\":\"𐀀\"}",
+    "sha256": "25cf565f707ab0c945098172383a07072df321ab9bbef600f928491fa8c6a6c9"
+  },
+  {
+    "name": "empty-key-and-internal-nul",
+    "input": "{\n  \"\": \"empty\",\n  \"x\\u0000\": \"internal NUL is permitted\"\n}",
+    "canonical": "{\"\":\"empty\",\"x\\u0000\":\"internal NUL is permitted\"}",
+    "sha256": "26b59ea77bec7f1b11987814988ba9795a5d1ec1a0928344f290a81e7c4265d3"
+  }
+]
