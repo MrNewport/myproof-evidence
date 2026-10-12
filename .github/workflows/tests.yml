@@ -11,6 +11,7 @@ jobs:
   protocol:
     runs-on: ubuntu-24.04
     strategy:
+      fail-fast: false
       matrix:
         php: ['8.3', '8.4']
     steps:
@@ -29,7 +30,9 @@ jobs:
       - run: composer test
       - run: node spec/evidence/generate-fixtures.mjs
       - run: node spec/evidence/generate-merchant-fixture.mjs
-      - run: node spec/evidence/generate-collection-fixtures.mjs
+      - run: TZ=UTC node spec/evidence/generate-collection-fixtures.mjs
+      - run: git diff --exit-code -- spec/evidence/fixtures
+      - run: TZ=Pacific/Kiritimati node spec/evidence/generate-collection-fixtures.mjs
       - run: php spec/evidence/generate-schemas.php
       - run: git diff --exit-code -- spec/evidence
       - name: Installed consumer CLI

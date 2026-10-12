@@ -5,9 +5,9 @@
         {
             "source": "packages/evidence/.github/workflows/tests.yml",
             "target": ".github/workflows/tests.yml",
-            "source_sha256": "22415b30d7440c99ae71beb3ac894a4a4bae1ae6b015761249dcc966be4b4105",
-            "release_sha256": "22415b30d7440c99ae71beb3ac894a4a4bae1ae6b015761249dcc966be4b4105",
-            "bytes": 1812
+            "source_sha256": "56c17a5be7ec7f3075f5cef099da1775bc229f9300bfb88a85841cf9f960a08a",
+            "release_sha256": "56c17a5be7ec7f3075f5cef099da1775bc229f9300bfb88a85841cf9f960a08a",
+            "bytes": 1989
         },
         {
             "source": "packages/evidence/.gitignore",
@@ -224,9 +224,9 @@
         {
             "source": "spec/evidence/collections.md",
             "target": "spec/evidence/collections.md",
-            "source_sha256": "30828690537a69c3e90493f8f53457fe18112c6e22f2d6c9cb84e2ca437b477c",
-            "release_sha256": "30828690537a69c3e90493f8f53457fe18112c6e22f2d6c9cb84e2ca437b477c",
-            "bytes": 5223
+            "source_sha256": "f5adaf8f5be2789cfc54251ecdb37f5db8861a73195e7636eb36094eb3d32efe",
+            "release_sha256": "f5adaf8f5be2789cfc54251ecdb37f5db8861a73195e7636eb36094eb3d32efe",
+            "bytes": 5519
         },
         {
             "source": "spec/evidence/event.schema.json",
@@ -252,36 +252,36 @@
         {
             "source": "spec/evidence/fixtures/collection-test/collection.json",
             "target": "spec/evidence/fixtures/collection-test/collection.json",
-            "source_sha256": "1c6c6c84f41ee27cc3ac93f2fd9c89baf61da2555c6751bd78c037e7c142d65f",
-            "release_sha256": "1c6c6c84f41ee27cc3ac93f2fd9c89baf61da2555c6751bd78c037e7c142d65f",
+            "source_sha256": "c616bbf2c261a97b6836e2dc28b5e68689c6268e6e466d96d7cba95db15e4cb2",
+            "release_sha256": "c616bbf2c261a97b6836e2dc28b5e68689c6268e6e466d96d7cba95db15e4cb2",
             "bytes": 2992
         },
         {
             "source": "spec/evidence/fixtures/collection-test/segment-0001.zip",
             "target": "spec/evidence/fixtures/collection-test/segment-0001.zip",
-            "source_sha256": "3d7cbba8d119dc6ba779ac1620d5db0c50dd05cc078e834f957224748e91ffab",
-            "release_sha256": "3d7cbba8d119dc6ba779ac1620d5db0c50dd05cc078e834f957224748e91ffab",
-            "bytes": 2139
+            "source_sha256": "34526b674c7e474bf586978de09e060cf0e324b1983236ccc287416d7984fe7b",
+            "release_sha256": "34526b674c7e474bf586978de09e060cf0e324b1983236ccc287416d7984fe7b",
+            "bytes": 5080
         },
         {
             "source": "spec/evidence/fixtures/collection-test/segment-0002.zip",
             "target": "spec/evidence/fixtures/collection-test/segment-0002.zip",
-            "source_sha256": "b8b652683c45ec96f3c40c9d1c4ec12b21b9b0ae03cf04c52bfb3ffe2e336c10",
-            "release_sha256": "b8b652683c45ec96f3c40c9d1c4ec12b21b9b0ae03cf04c52bfb3ffe2e336c10",
-            "bytes": 2270
+            "source_sha256": "2c26d9a4acd2271f68df5c661ea31a87614b9fd75a95f9ba68da80e5e9ea5dd1",
+            "release_sha256": "2c26d9a4acd2271f68df5c661ea31a87614b9fd75a95f9ba68da80e5e9ea5dd1",
+            "bytes": 5162
         },
         {
             "source": "spec/evidence/fixtures/collection-test/segment-0003.zip",
             "target": "spec/evidence/fixtures/collection-test/segment-0003.zip",
-            "source_sha256": "98d001ad4ac90fed82091b8b41eb917f6d688e41ac9ea5b2a4a1ede5999e1e3a",
-            "release_sha256": "98d001ad4ac90fed82091b8b41eb917f6d688e41ac9ea5b2a4a1ede5999e1e3a",
-            "bytes": 2547
+            "source_sha256": "f6e27775c0ee1306c44e8a918a12f2d6534ce751583cfa9b16967c75554ce3ff",
+            "release_sha256": "f6e27775c0ee1306c44e8a918a12f2d6534ce751583cfa9b16967c75554ce3ff",
+            "bytes": 5976
         },
         {
             "source": "spec/evidence/fixtures/collection-test/signature.ed25519",
             "target": "spec/evidence/fixtures/collection-test/signature.ed25519",
-            "source_sha256": "6e1fa9888e7c1fbaf0a04c36797d023908a5c32966897460aa41e1ffbfec90a7",
-            "release_sha256": "6e1fa9888e7c1fbaf0a04c36797d023908a5c32966897460aa41e1ffbfec90a7",
+            "source_sha256": "6c39a542672660b3b6c59445f0935d83c9f03e916462065b0c715c84d5e954b1",
+            "release_sha256": "6c39a542672660b3b6c59445f0935d83c9f03e916462065b0c715c84d5e954b1",
             "bytes": 64
         },
         {
@@ -385,9 +385,9 @@
         {
             "source": "spec/evidence/generate-collection-fixtures.mjs",
             "target": "spec/evidence/generate-collection-fixtures.mjs",
-            "source_sha256": "401d1b48a458098cfb093ec6de844fc183d348e579455113b0552f9607cad409",
-            "release_sha256": "401d1b48a458098cfb093ec6de844fc183d348e579455113b0552f9607cad409",
-            "bytes": 4739
+            "source_sha256": "af50c0a7a2bb2d4e6a2186f6acde71d345e5feb76570b329c3f2d00505926d7d",
+            "release_sha256": "af50c0a7a2bb2d4e6a2186f6acde71d345e5feb76570b329c3f2d00505926d7d",
+            "bytes": 6501
         },
         {
             "source": "spec/evidence/generate-fixtures.mjs",

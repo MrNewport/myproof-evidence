@@ -1,12 +1,64 @@
-// Independent Node crypto/canonicalizer and system ZIP: never calls PHP.
+// Independent Node crypto/canonicalizer and deterministic ZIP: never calls PHP.
 // Uses the original v2 fixture event bytes, unchanged, split into three parts.
 import { canonical } from './generate-fixtures.mjs';
 import { createHash, createPrivateKey, createPublicKey, sign } from 'node:crypto';
-import { readFileSync, writeFileSync, mkdirSync, utimesSync, mkdtempSync, rmSync } from 'node:fs';
-import { execFileSync } from 'node:child_process';
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+
+// ZIP's DOS timestamp is local time, and system zip/deflate output varies by
+// host. These tiny test archives use stored entries and fixed headers instead.
+// The collection verifier accepts method 0; no production archive is changed.
+const zipDate = ((2000 - 1980) << 9) | (1 << 5) | 1;
+const crcTable = Array.from({length: 256}, (_, value) => {
+  for (let bit = 0; bit < 8; bit++) value = (value & 1) ? (value >>> 1) ^ 0xedb88320 : value >>> 1;
+  return value >>> 0;
+});
+const crc32 = bytes => {
+  let crc = 0xffffffff;
+  for (const byte of bytes) crc = (crc >>> 8) ^ crcTable[(crc ^ byte) & 0xff];
+  return (crc ^ 0xffffffff) >>> 0;
+};
+function fixedZip(entries) {
+  const local = [], directory = [];
+  let offset = 0;
+  for (const [name, content] of Object.entries(entries)) {
+    const filename = Buffer.from(name, 'utf8'), bytes = Buffer.from(content, 'utf8');
+    if (filename.length > 0xffff || bytes.length > 0xffffffff) throw new Error('Fixture ZIP entry exceeds format bounds.');
+    const checksum = crc32(bytes);
+    const header = Buffer.alloc(30);
+    header.writeUInt32LE(0x04034b50, 0);
+    header.writeUInt16LE(20, 4); // ZIP 2.0, stored entry
+    header.writeUInt16LE(zipDate, 12);
+    header.writeUInt32LE(checksum, 14);
+    header.writeUInt32LE(bytes.length, 18);
+    header.writeUInt32LE(bytes.length, 22);
+    header.writeUInt16LE(filename.length, 26);
+    local.push(header, filename, bytes);
+
+    const record = Buffer.alloc(46);
+    record.writeUInt32LE(0x02014b50, 0);
+    record.writeUInt16LE((3 << 8) | 20, 4); // Unix origin, ZIP 2.0
+    record.writeUInt16LE(20, 6);
+    record.writeUInt16LE(zipDate, 14);
+    record.writeUInt32LE(checksum, 16);
+    record.writeUInt32LE(bytes.length, 20);
+    record.writeUInt32LE(bytes.length, 24);
+    record.writeUInt16LE(filename.length, 28);
+    record.writeUInt32LE((0o100644 << 16) >>> 0, 38);
+    record.writeUInt32LE(offset, 42);
+    directory.push(record, filename);
+    offset += header.length + filename.length + bytes.length;
+  }
+  const central = Buffer.concat(directory);
+  const end = Buffer.alloc(22);
+  end.writeUInt32LE(0x06054b50, 0);
+  end.writeUInt16LE(Object.keys(entries).length, 8);
+  end.writeUInt16LE(Object.keys(entries).length, 10);
+  end.writeUInt32LE(central.length, 12);
+  end.writeUInt32LE(offset, 16);
+  return Buffer.concat([...local, central, end]);
+}
 const dir = fileURLToPath(new URL('./fixtures/collection-test/', import.meta.url));
 mkdirSync(dir,{recursive:true});
 const hash = v => createHash('sha256').update(v).digest('hex');
@@ -21,17 +73,10 @@ for (let offset=0;offset<original.length;offset+=3) {
   const html='<html><body><p>All segment observations, including adverse facts:</p><pre>'+lines.join('\n').replaceAll('&','&amp;').replaceAll('<','&lt;')+'</pre></body></html>';
   const artifacts=[{name:'context.json',sha256:hash(context),size:Buffer.byteLength(context)},{name:'report.html',sha256:hash(html),size:Buffer.byteLength(html)}];
   const envelope=canonical({schema:'myproof.evidence.segment.v1',...identity,index,chain_start:{sequence:start.sequence,previous_sha256:start.previous_hash},chain_head:{sequence:end.sequence,sha256:hash(lines.at(-1))},events_sha256:hash(ndjson),events_bytes:Buffer.byteLength(ndjson),event_count:lines.length,artifacts});
-  const scratch=mkdtempSync(join(tmpdir(),'myproof-node-fixture-'));
-  try {
-    for(const [name,bytes] of Object.entries({'segment.json':envelope,'events.ndjson':ndjson,'context.json':context,'report.html':html})) {
-      writeFileSync(join(scratch,name),bytes);utimesSync(join(scratch,name),946684800,946684800);
-    }
-    const path='segment-'+String(index).padStart(4,'0')+'.zip';
-    const archivePath=join(scratch,path);
-    execFileSync('/usr/bin/zip',['-X','-q',archivePath,'segment.json','events.ndjson','context.json','report.html'],{cwd:scratch});
-    const archive=readFileSync(archivePath);writeFileSync(join(dir,path),archive);
-    descriptors.push({index,path,segment_sha256:hash(envelope),archive_sha256:hash(archive),archive_size:archive.length,events_sha256:hash(ndjson),events_bytes:Buffer.byteLength(ndjson),event_count:lines.length,first_sequence:start.sequence,last_sequence:end.sequence,previous_sha256:start.previous_hash,last_sha256:hash(lines.at(-1))});
-  } finally {rmSync(scratch,{recursive:true,force:true});}
+  const path='segment-'+String(index).padStart(4,'0')+'.zip';
+  const archive=fixedZip({'segment.json':envelope,'events.ndjson':ndjson,'context.json':context,'report.html':html});
+  writeFileSync(join(dir,path),archive);
+  descriptors.push({index,path,segment_sha256:hash(envelope),archive_sha256:hash(archive),archive_size:archive.length,events_sha256:hash(ndjson),events_bytes:Buffer.byteLength(ndjson),event_count:lines.length,first_sequence:start.sequence,last_sequence:end.sequence,previous_sha256:start.previous_hash,last_sha256:hash(lines.at(-1))});
 }
 const snapshot=canonical({...identity,head_sequence:last.sequence,head_hash:hash(original.at(-1)),requested_at:'2026-10-12T12:04:00.000000Z'});
 writeFileSync(join(dir,'snapshot.json'),snapshot);
